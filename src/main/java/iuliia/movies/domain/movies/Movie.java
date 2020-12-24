@@ -1,10 +1,13 @@
-package iuliia.movies;
+package iuliia.movies.domain.movies;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import iuliia.movies.domain.actors.Actor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -15,10 +18,11 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @NotNull
+    @NotEmpty
     private String title;
     private int year;
     private String country;
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name="movie_cast",
             joinColumns= @JoinColumn(name="movie_id", referencedColumnName="id"),
