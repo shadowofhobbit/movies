@@ -1,7 +1,6 @@
 package iuliia.movies.domain.movies;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import iuliia.movies.domain.actors.Actor;
 import lombok.Getter;
 import lombok.Setter;

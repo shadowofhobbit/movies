@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @RestController
 @RequestMapping("/actors")
@@ -13,7 +15,7 @@ public class ActorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Actor create(@RequestBody Actor actor) {
+    public Actor create(@RequestBody @Valid Actor actor) {
         return actorService.create(actor);
     }
 
