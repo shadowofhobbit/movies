@@ -2,10 +2,12 @@ package iuliia.movies.domain.movies;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MovieService {
     private final MovieRepository movieRepository;
@@ -14,10 +16,12 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    @Transactional(readOnly = true)
     public List<Movie> getAll() {
         return movieRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Movie getById(Long id) {
         return movieRepository.findById(id).orElseThrow();
     }

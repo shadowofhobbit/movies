@@ -18,7 +18,7 @@ public class CastService {
 
     @Transactional
     public void addCastMember(Long actorId, Long movieId) {
-        Movie movie = movieRepository.getOne(movieId);
+        Movie movie = movieRepository.findById(movieId).orElseThrow();
         Actor actor = actorRepository.findById(actorId).orElseThrow();
         movie.getCast().add(actor);
         actor.getMovies().add(movie);
