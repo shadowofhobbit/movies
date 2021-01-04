@@ -34,9 +34,9 @@ public class ActorController {
         return actorService.update(id, actor);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(Long id) {
+    public void delete(@PathVariable Long id) {
         actorService.deleteById(id);
     }
 }

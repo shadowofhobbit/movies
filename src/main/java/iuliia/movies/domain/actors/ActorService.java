@@ -2,6 +2,7 @@ package iuliia.movies.domain.actors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,9 @@ public class ActorService {
         return actorRepository.save(actor);
     }
 
+    @Transactional
     public void deleteById(Long id) {
+        actorRepository.deleteActorFromMovies(id);
         actorRepository.deleteById(id);
     }
 
