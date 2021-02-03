@@ -1,17 +1,21 @@
 package iuliia.movies.error;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import graphql.GraphQLError;
+import graphql.servlet.GenericGraphQLError;
+import graphql.servlet.GraphQLErrorHandler;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.NoSuchElementException;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@RestControllerAdvice
-public class ErrorHandler {
+@Component
+public class ErrorHandler implements GraphQLErrorHandler {
 
-    @ExceptionHandler({NoSuchElementException.class, EntityNotFoundException.class})
-    public ResponseEntity<?> handleNoSuchElement() {
-        return ResponseEntity.notFound().build();
+
+    @Override
+    public List<GraphQLError> processErrors(List<GraphQLError> list) {
+        return list.stream()
+                .map(error -> new GenericGraphQLError(error.getMessage()))
+                .collect(Collectors.toList());
     }
 }

@@ -1,0 +1,24 @@
+type Movie {
+    id: ID!,
+    title: String!,
+    year: Int,
+    country: String
+    premier: String,
+    length: Int,
+    director: String
+}
+
+type Actor {
+    id: ID!,
+    firstName: String!,
+    lastName: String,
+    middleName: String,
+    birthday: String
+}
+
+type Query {
+    actors: [Actor!]!
+    actor(id: ID!): Actor
+    movies: [Movie!]!
+    movie(id: ID!): Movie
+}

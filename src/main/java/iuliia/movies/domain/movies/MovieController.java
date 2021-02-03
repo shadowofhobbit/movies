@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
@@ -17,16 +16,6 @@ public class MovieController {
     @ResponseStatus(HttpStatus.CREATED)
     public Movie create(@RequestBody @Valid Movie movie) {
         return movieService.create(movie);
-    }
-
-    @GetMapping
-    public List<Movie> get() {
-        return movieService.getAll();
-    }
-
-    @GetMapping("/{id}")
-    public Movie get(@PathVariable Long id) {
-        return movieService.getById(id);
     }
 
     @PutMapping("/{id}")
