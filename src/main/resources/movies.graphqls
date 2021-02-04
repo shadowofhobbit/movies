@@ -8,8 +8,24 @@ type Movie {
     director: String
 }
 
+input MovieInput {
+    title: String!,
+    year: Int,
+    country: String
+    premier: String,
+    length: Int,
+    director: String
+}
+
 type Actor {
     id: ID!,
+    firstName: String!,
+    lastName: String,
+    middleName: String,
+    birthday: String
+}
+
+input ActorInput {
     firstName: String!,
     lastName: String,
     middleName: String,
@@ -19,6 +35,17 @@ type Actor {
 type Query {
     actors: [Actor!]!
     actor(id: ID!): Actor
+
     movies: [Movie!]!
     movie(id: ID!): Movie
+}
+
+type Mutation {
+    createActor(input: ActorInput!): Actor
+    updateActor(id: ID!, input: ActorInput!): Actor
+    deleteActor(id: ID!): ID
+
+    createMovie(input: MovieInput!): Movie
+    updateMovie(id: ID!, input: MovieInput!): Movie
+    deleteMovie(id: ID!): ID
 }
