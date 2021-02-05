@@ -2,6 +2,7 @@ package iuliia.movies.domain.movies;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,8 +23,11 @@ public class MovieService {
         return movieRepository.findById(id).orElseThrow();
     }
 
+    @Transactional
     public Movie update(Long id, Movie movie) {
         movie.setId(id);
+        var oldMovie = movieRepository.getOne(id);
+        movie.setCast(oldMovie.getCast());
         return movieRepository.save(movie);
     }
 

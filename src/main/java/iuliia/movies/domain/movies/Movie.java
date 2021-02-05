@@ -1,6 +1,7 @@
 package iuliia.movies.domain.movies;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import iuliia.movies.domain.actors.Actor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@JsonIgnoreProperties("hibernateLazyInitializer")
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
