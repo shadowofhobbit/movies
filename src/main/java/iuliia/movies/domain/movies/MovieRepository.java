@@ -5,9 +5,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    @Query("select m from Movie m join m.cast a on a.id = ?1")
-    List<Movie> findMoviesByActorId(Long actorId);
+
+    @Query(value = "select m from Movie m join fetch m.cast")
+    List<Movie> findMoviesWithActors();
+
+    @Query(value = "select m from Movie m join fetch m.cast where m.id = ?1")
+    Optional<Movie> findMovieWithActorsById(long id);
 }

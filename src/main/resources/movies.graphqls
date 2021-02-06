@@ -6,6 +6,7 @@ type Movie {
     premier: String,
     length: Int,
     director: String
+    cast: [Actor!]!
 }
 
 input MovieInput {
@@ -23,6 +24,7 @@ type Actor {
     lastName: String,
     middleName: String,
     birthday: String
+    movies: [Movie!]!
 }
 
 input ActorInput {
@@ -48,4 +50,6 @@ type Mutation {
     createMovie(input: MovieInput!): Movie
     updateMovie(id: ID!, input: MovieInput!): Movie
     deleteMovie(id: ID!): ID
+
+    addMovieActor(movieId: ID!, actorId: ID): Movie
 }

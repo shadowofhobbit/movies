@@ -1,6 +1,5 @@
 package iuliia.movies.domain.movies;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import iuliia.movies.domain.actors.Actor;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +20,6 @@ public class Movie {
     private String title;
     private int year;
     private String country;
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name="movie_cast",
             joinColumns= @JoinColumn(name="movie_id", referencedColumnName="id"),

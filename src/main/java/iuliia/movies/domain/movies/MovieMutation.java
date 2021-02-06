@@ -25,4 +25,8 @@ public class MovieMutation implements GraphQLMutationResolver {
         movieService.deleteById(id);
         return id;
     }
+
+    public Movie addMovieActor(long movieId, long actorId) {
+        return movieService.addActor(movieId, actorId);
+    }
 }

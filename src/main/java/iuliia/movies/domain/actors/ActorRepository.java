@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ActorRepository extends CrudRepository<Actor, Long> {
@@ -15,4 +16,10 @@ public interface ActorRepository extends CrudRepository<Actor, Long> {
     @Modifying
     @Query(value="delete from movie_cast where cast_id=?1", nativeQuery = true)
     void deleteActorFromMovies(long id);
+
+    @Query("select a from Actor a join fetch a.movies")
+    List<Actor> findActorsWithMovies();
+
+    @Query("select a from Actor a join fetch a.movies where a.id = ?1")
+    Optional<Actor> findActorWithMoviesById(long actorId);
 }
