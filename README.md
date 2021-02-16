@@ -12,6 +12,8 @@ See different implementations:
 
 [Using JPA API](../../tree/spring-jpa)
 
-Also:
+[Using Spring JDBC](../../tree/spring-jdbc)
+
+Also see:
 
 [GraphQL instead of REST](../../tree/graphql)
