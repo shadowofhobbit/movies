@@ -5,17 +5,14 @@ import iuliia.movies.domain.movies.Movie;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Entity
+
 @Getter
 @Setter
 public class Actor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotEmpty
     private String firstName;
@@ -23,7 +20,6 @@ public class Actor {
     private String middleName;
     private LocalDate birthday;
     @JsonIgnore
-    @ManyToMany(mappedBy = "cast")
     private Set<Movie> movies;
 
     @Override

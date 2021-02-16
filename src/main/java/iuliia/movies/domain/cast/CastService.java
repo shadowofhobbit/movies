@@ -12,16 +12,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CastService {
     private final MovieRepository movieRepository;
     private final ActorRepository actorRepository;
 
-    @Transactional
     public void addCastMember(Long actorId, Long movieId) {
-        Movie movie = movieRepository.getOne(movieId);
-        Actor actor = actorRepository.findById(actorId).orElseThrow();
-        movie.getCast().add(actor);
-        actor.getMovies().add(movie);
+        movieRepository.addActorToMovie(movieId, actorId);
     }
 
     @Transactional(readOnly = true)

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ActorService {
     private final ActorRepository actorRepository;
 
@@ -13,10 +14,12 @@ public class ActorService {
         return actorRepository.save(actor);
     }
 
+    @Transactional(readOnly = true)
     public Iterable<Actor> getAll() {
         return actorRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Actor getById(Long id) {
         return actorRepository.findById(id).orElseThrow();
     }
@@ -26,7 +29,6 @@ public class ActorService {
         return actorRepository.save(actor);
     }
 
-    @Transactional
     public void deleteById(Long id) {
         actorRepository.deleteActorFromMovies(id);
         actorRepository.deleteById(id);

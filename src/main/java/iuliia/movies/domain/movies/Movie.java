@@ -1,33 +1,23 @@
 package iuliia.movies.domain.movies;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import iuliia.movies.domain.actors.Actor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 import java.util.Set;
 
-@Entity
 @Getter
 @Setter
-@JsonIgnoreProperties("hibernateLazyInitializer")
 public class Movie {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @NotEmpty
     private String title;
     private int year;
     private String country;
     @JsonIgnore
-    @ManyToMany
-    @JoinTable(name="movie_cast",
-            joinColumns= @JoinColumn(name="movie_id", referencedColumnName="id"),
-            inverseJoinColumns= @JoinColumn(name="cast_id", referencedColumnName="id"))
     private Set<Actor> cast;
     private LocalDate premier;
     private int length;

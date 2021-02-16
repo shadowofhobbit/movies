@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class MovieService {
     private final MovieRepository movieRepository;
 
@@ -15,23 +16,23 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    @Transactional(readOnly = true)
     public List<Movie> getAll() {
         return movieRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Movie getById(Long id) {
         return movieRepository.findById(id).orElseThrow();
     }
 
-    @Transactional
     public Movie update(Long id, Movie movie) {
         movie.setId(id);
-        var oldMovie = movieRepository.getOne(id);
-        movie.setCast(oldMovie.getCast());
         return movieRepository.save(movie);
     }
 
     public void deleteById(Long id) {
+        movieRepository.deleteMovieCast(id);
         movieRepository.deleteById(id);
     }
 }
