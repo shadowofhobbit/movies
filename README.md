@@ -1,6 +1,6 @@
 # Movies
 
-A simple API that allows to create, read, update and delete movies and actors.
+A simple REST API that allows to create, read, update and delete movies and actors.
 
 See different implementations:
 
@@ -13,6 +13,8 @@ See different implementations:
 [Using JPA API](../../tree/spring-jpa)
 
 [Using Spring JDBC](../../tree/spring-jdbc)
+
+[Using Spring WebFlux and MongoDB](../../tree/webflux-mongo)
 
 Also see:
 
