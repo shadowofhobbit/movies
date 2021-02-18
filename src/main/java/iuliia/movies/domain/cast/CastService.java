@@ -7,8 +7,8 @@ import iuliia.movies.domain.movies.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -17,20 +17,28 @@ public class CastService {
     private final ActorRepository actorRepository;
 
     @Transactional
-    public void addCastMember(Long actorId, Long movieId) {
-        Movie movie = movieRepository.getOne(movieId);
-        Actor actor = actorRepository.findById(actorId).orElseThrow();
-        movie.getCast().add(actor);
-        actor.getMovies().add(movie);
+    public Mono<Void> addCastMember(String actorId, String movieId) {
+        return movieRepository.findById(movieId)
+                .map(movie -> {
+                    movie.getActorIds().add(actorId);
+                    return movieRepository.save(movie);
+                })
+                .then(
+                        actorRepository.findById(actorId)
+                                .map(actor -> {
+                                    actor.getMovieIds().add(movieId);
+                                    return actorRepository.save(actor);
+                                }))
+                .then();
     }
 
     @Transactional(readOnly = true)
-    public List<Actor> getCast(Long movieId) {
-        return actorRepository.findActorsByMovieId(movieId);
+    public Flux<Actor> getCast(String movieId) {
+        return actorRepository.findActorsByMovieIdsContains(movieId);
     }
 
     @Transactional(readOnly = true)
-    public List<Movie> getMoviesForActor(Long actorId) {
-        return movieRepository.findMoviesByActorId(actorId);
+    public Flux<Movie> getMoviesForActor(String actorId) {
+        return movieRepository.findMoviesByActorIdsContaining(actorId);
     }
 }

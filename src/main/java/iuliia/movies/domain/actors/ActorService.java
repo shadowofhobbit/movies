@@ -3,33 +3,35 @@ package iuliia.movies.domain.actors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
 public class ActorService {
     private final ActorRepository actorRepository;
 
-    public Actor create(Actor actor) {
+    public Mono<Actor> create(Actor actor) {
         return actorRepository.save(actor);
     }
 
-    public Iterable<Actor> getAll() {
+    public Flux<Actor> getAll() {
         return actorRepository.findAll();
     }
 
-    public Actor getById(Long id) {
-        return actorRepository.findById(id).orElseThrow();
+    public Mono<Actor> getById(String id) {
+        return actorRepository.findById(id);
     }
 
-    public Actor update(Long id, Actor actor) {
+    public Mono<Actor> update(String id, Actor actor) {
         actor.setId(id);
         return actorRepository.save(actor);
     }
 
     @Transactional
-    public void deleteById(Long id) {
-        actorRepository.deleteActorFromMovies(id);
-        actorRepository.deleteById(id);
+    public Mono<Void> deleteById(String id) {
+        //actorRepository.deleteActorFromMovies(id);
+        return actorRepository.deleteById(id);
     }
 
 }

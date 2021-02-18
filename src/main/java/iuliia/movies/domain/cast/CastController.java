@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,17 +16,17 @@ public class CastController {
     private final CastService castService;
 
     @PutMapping("/movies/{movieId}/cast/{actorId}")
-    void addCastMember(@PathVariable Long actorId, @PathVariable Long movieId) {
-        castService.addCastMember(actorId, movieId);
+    Mono<Void> addCastMember(@PathVariable String actorId, @PathVariable String movieId) {
+        return castService.addCastMember(actorId, movieId);
     }
 
     @GetMapping("/movies/{movieId}/cast")
-    List<Actor> getCast(@PathVariable Long movieId) {
+    Flux<Actor> getCast(@PathVariable String movieId) {
         return castService.getCast(movieId);
     }
 
     @GetMapping("/actors/{actorId}/movies")
-    List<Movie> getMoviesForActor(@PathVariable Long actorId) {
+    Flux<Movie> getMoviesForActor(@PathVariable String actorId) {
         return castService.getMoviesForActor(actorId);
     }
 

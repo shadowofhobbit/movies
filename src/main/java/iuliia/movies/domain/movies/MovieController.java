@@ -3,9 +3,10 @@ package iuliia.movies.domain.movies;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/movies")
@@ -15,28 +16,28 @@ public class MovieController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Movie create(@RequestBody @Valid Movie movie) {
+    public Mono<Movie> create(@RequestBody @Valid Movie movie) {
         return movieService.create(movie);
     }
 
     @GetMapping
-    public List<Movie> get() {
+    public Flux<Movie> get() {
         return movieService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Movie get(@PathVariable Long id) {
+    public Mono<Movie> get(@PathVariable String id) {
         return movieService.getById(id);
     }
 
     @PutMapping("/{id}")
-    public Movie update(@PathVariable Long id, @RequestBody @Valid Movie movie) {
+    public Mono<Movie> update(@PathVariable String id, @RequestBody @Valid Movie movie) {
         return movieService.update(id, movie);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        movieService.deleteById(id);
+    public Mono<Void> delete(@PathVariable String id) {
+        return movieService.deleteById(id);
     }
 }
