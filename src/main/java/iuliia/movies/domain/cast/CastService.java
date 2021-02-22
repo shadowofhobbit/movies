@@ -44,4 +44,22 @@ public class CastService {
     public Flux<Movie> getMoviesForActor(String actorId) {
         return movieRepository.findMoviesByActorIdsContaining(actorId);
     }
+
+    public Mono<Void> deleteActorFromMovies(String actorId) {
+        return getMoviesForActor(actorId)
+                .flatMap(movie -> {
+                    movie.getActorIds().remove(actorId);
+                    return movieRepository.save(movie);
+                })
+                .then();
+    }
+
+    public Mono<Void> deleteMovieFromActors(String movieId) {
+        return getCast(movieId)
+                .flatMap(actor -> {
+                    actor.getMovieIds().remove(movieId);
+                    return actorRepository.save(actor);
+                })
+                .then();
+    }
 }

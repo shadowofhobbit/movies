@@ -1,5 +1,6 @@
 package iuliia.movies.domain.movies;
 
+import iuliia.movies.domain.cast.CastService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,6 +10,7 @@ import reactor.core.publisher.Mono;
 @Service
 @RequiredArgsConstructor
 public class MovieService {
+    private final CastService castService;
     private final MovieRepository movieRepository;
 
     public Mono<Movie> create(Movie movie) {
@@ -25,11 +27,16 @@ public class MovieService {
 
     @Transactional
     public Mono<Movie> update(String id, Movie movie) {
-        movie.setId(id);
-        return movieRepository.save(movie);
+        return movieRepository.findById(id)
+                .flatMap(found -> {
+                    movie.setId(id);
+                    movie.setActorIds(found.getActorIds());
+                    return movieRepository.save(movie);
+                });
     }
 
     public Mono<Void> deleteById(String id) {
-        return movieRepository.deleteById(id);
+        return castService.deleteMovieFromActors(id)
+                .then(movieRepository.deleteById(id));
     }
 }
