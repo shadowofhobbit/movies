@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Document
@@ -20,6 +21,6 @@ public class Actor {
     private String middleName;
     private LocalDate birthday;
     @JsonIgnore
-    private Set<String> movieIds;
+    private Set<String> movieIds = new HashSet<>();
 
 }

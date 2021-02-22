@@ -18,17 +18,20 @@ public class CastService {
 
     @Transactional
     public Mono<Void> addCastMember(String actorId, String movieId) {
-        return movieRepository.findById(movieId)
-                .map(movie -> {
+        return actorRepository.findById(actorId)
+                .flatMap(a -> movieRepository.findById(movieId))
+                .flatMap(movie -> {
                     movie.getActorIds().add(actorId);
                     return movieRepository.save(movie);
                 })
+                .log()
                 .then(
                         actorRepository.findById(actorId)
-                                .map(actor -> {
+                                .flatMap(actor -> {
                                     actor.getMovieIds().add(movieId);
                                     return actorRepository.save(actor);
                                 }))
+                .log()
                 .then();
     }
 
