@@ -8,9 +8,9 @@ See different implementations:
 
 [Using Spring Data](../../tree/spring-data)
 
-[Using Hibernate API instead of Spring Data](../../tree/spring-hibernate)
+[Using Hibernate API instead of Spring Data](../../tree/hibernate)
 
-[Using JPA API](../../tree/spring-jpa)
+[Using JPA API](../../tree/jpa)
 
 [Using Spring JDBC](../../tree/spring-jdbc)
 
