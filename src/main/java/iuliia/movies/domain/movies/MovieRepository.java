@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, Long> {
-    @Query("select m from Movie m join m.cast a on a.id = ?1")
-    List<Movie> findMoviesByActorId(Long actorId);
+public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
+    @Query("select m from MovieEntity m join m.cast a on a.id = ?1")
+    List<MovieEntity> findMoviesByActorId(Long actorId);
 }

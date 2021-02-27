@@ -15,22 +15,17 @@ public class MovieController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Movie create(@RequestBody @Valid Movie movie) {
+    public MovieEntity create(@RequestBody @Valid MovieEntity movie) {
         return movieService.create(movie);
     }
 
     @GetMapping
-    public List<Movie> get() {
+    public List<MovieEntity> get() {
         return movieService.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Movie get(@PathVariable Long id) {
-        return movieService.getById(id);
-    }
-
     @PutMapping("/{id}")
-    public Movie update(@PathVariable Long id, @RequestBody @Valid Movie movie) {
+    public MovieEntity update(@PathVariable Long id, @RequestBody @Valid MovieEntity movie) {
         return movieService.update(id, movie);
     }
 

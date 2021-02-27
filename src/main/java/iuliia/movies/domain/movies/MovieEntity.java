@@ -15,7 +15,8 @@ import java.util.Set;
 @Getter
 @Setter
 @JsonIgnoreProperties("hibernateLazyInitializer")
-public class Movie {
+@Table(name = "movie")
+public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -37,7 +38,7 @@ public class Movie {
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null || getClass() != other.getClass()) return false;
-        Movie movie = (Movie) other;
+        MovieEntity movie = (MovieEntity) other;
         return id != null && id.equals(movie.id);
     }
 

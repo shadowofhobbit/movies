@@ -1,7 +1,7 @@
 package iuliia.movies.domain.actors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import iuliia.movies.domain.movies.Movie;
+import iuliia.movies.domain.movies.MovieEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +24,7 @@ public class Actor {
     private LocalDate birthday;
     @JsonIgnore
     @ManyToMany(mappedBy = "cast")
-    private Set<Movie> movies;
+    private Set<MovieEntity> movies;
 
     @Override
     public boolean equals(Object other) {

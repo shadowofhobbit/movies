@@ -1,7 +1,7 @@
 package iuliia.movies.domain.cast;
 
 import iuliia.movies.domain.actors.Actor;
-import iuliia.movies.domain.movies.Movie;
+import iuliia.movies.domain.movies.MovieEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +26,7 @@ public class CastController {
     }
 
     @GetMapping("/actors/{actorId}/movies")
-    List<Movie> getMoviesForActor(@PathVariable Long actorId) {
+    List<MovieEntity> getMoviesForActor(@PathVariable Long actorId) {
         return castService.getMoviesForActor(actorId);
     }
 
