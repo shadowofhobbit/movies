@@ -1,6 +1,5 @@
 package iuliia.movies.domain.actors;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import iuliia.movies.domain.movies.MovieEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +12,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Actor {
+@Table(name = "actor")
+public class ActorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -22,7 +22,6 @@ public class Actor {
     private String lastName;
     private String middleName;
     private LocalDate birthday;
-    @JsonIgnore
     @ManyToMany(mappedBy = "cast")
     private Set<MovieEntity> movies;
 
@@ -30,7 +29,7 @@ public class Actor {
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null || getClass() != other.getClass()) return false;
-        Actor actor = (Actor) other;
+        ActorEntity actor = (ActorEntity) other;
         return id != null && id.equals(actor.id);
     }
 

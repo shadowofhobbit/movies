@@ -1,6 +1,6 @@
 package iuliia.movies.domain.cast;
 
-import iuliia.movies.domain.actors.Actor;
+import iuliia.movies.domain.actors.ActorEntity;
 import iuliia.movies.domain.actors.ActorRepository;
 import iuliia.movies.domain.movies.MovieEntity;
 import iuliia.movies.domain.movies.MovieRepository;
@@ -19,13 +19,13 @@ public class CastService {
     @Transactional
     public void addCastMember(Long actorId, Long movieId) {
         MovieEntity movie = movieRepository.getOne(movieId);
-        Actor actor = actorRepository.findById(actorId).orElseThrow();
+        ActorEntity actor = actorRepository.findById(actorId).orElseThrow();
         movie.getCast().add(actor);
         actor.getMovies().add(movie);
     }
 
     @Transactional(readOnly = true)
-    public List<Actor> getCast(Long movieId) {
+    public List<ActorEntity> getCast(Long movieId) {
         return actorRepository.findActorsByMovieId(movieId);
     }
 

@@ -16,10 +16,6 @@ public class MovieService {
     private final MovieConverter movieConverter;
     private final MovieRepository movieRepository;
 
-    public MovieEntity create(MovieEntity movie) {
-        return movieRepository.save(movie);
-    }
-
     public Movie create(MovieInvoice movie) {
         var entity = movieConverter.toMovieEntity(movie);
         var savedEntity = movieRepository.save(entity);

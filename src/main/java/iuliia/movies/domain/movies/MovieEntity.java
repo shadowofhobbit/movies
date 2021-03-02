@@ -1,8 +1,7 @@
 package iuliia.movies.domain.movies;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import iuliia.movies.domain.actors.Actor;
+import iuliia.movies.domain.actors.ActorEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,12 +23,11 @@ public class MovieEntity {
     private String title;
     private int year;
     private String country;
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name="movie_cast",
             joinColumns= @JoinColumn(name="movie_id", referencedColumnName="id"),
             inverseJoinColumns= @JoinColumn(name="cast_id", referencedColumnName="id"))
-    private Set<Actor> cast;
+    private Set<ActorEntity> cast;
     private LocalDate premier;
     private int length;
     private String director;

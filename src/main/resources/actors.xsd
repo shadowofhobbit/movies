@@ -1,0 +1,87 @@
+<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m="http://iuliia.movies/service"
+           xmlns:tns="http://iuliia.movies/service/actors" targetNamespace="http://iuliia.movies/service/actors"
+           elementFormDefault="qualified">
+    <xs:import schemaLocation="movies.xsd" namespace="http://iuliia.movies/service"/>
+    <xs:element name="createActorRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actor" type="tns:actorInvoice"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createActorResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actor" type="tns:actor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getActorRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getActorResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actor" type="tns:actor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAllActorsRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAllActorsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actor" minOccurs="0" maxOccurs="unbounded" type="tns:actor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateActorRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actor" type="tns:actor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateActorResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actor" type="tns:actor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteActorRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteActorResponse">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="actorInvoice">
+        <xs:sequence>
+            <xs:element name="firstName" type="m:non-empty-string"/>
+            <xs:element name="lastName" minOccurs="0" type="xs:string"/>
+            <xs:element name="middleName" minOccurs="0" type="xs:string"/>
+            <xs:element name="birthday" minOccurs="0" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="actor">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="firstName" type="m:non-empty-string"/>
+            <xs:element name="lastName" minOccurs="0" type="xs:string"/>
+            <xs:element name="middleName" minOccurs="0" type="xs:string"/>
+            <xs:element name="birthday" minOccurs="0" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

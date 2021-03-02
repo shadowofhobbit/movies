@@ -11,8 +11,8 @@ import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
-import org.springframework.xml.xsd.SimpleXsdSchema;
-import org.springframework.xml.xsd.XsdSchema;
+import org.springframework.xml.xsd.XsdSchemaCollection;
+import org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         var validatingInterceptor = new PayloadValidatingInterceptor();
         validatingInterceptor.setValidateRequest(true);
         validatingInterceptor.setValidateResponse(true);
-        validatingInterceptor.setXsdSchema(xsdSchema());
+        validatingInterceptor.setXsdSchemaCollection(xsdSchemaCollection());
         interceptors.add(validatingInterceptor);
     }
 
@@ -38,17 +38,20 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     }
 
     @Bean(name = "movies")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema xsdSchema) {
+    public DefaultWsdl11Definition defaultWsdl11Definition() {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("MoviesPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://iuliia.movies/service");
-        wsdl11Definition.setSchema(xsdSchema);
+        wsdl11Definition.setSchemaCollection(xsdSchemaCollection());
         return wsdl11Definition;
     }
 
     @Bean
-    public XsdSchema xsdSchema() {
-        return new SimpleXsdSchema(new ClassPathResource("movies.xsd"));
+    public XsdSchemaCollection xsdSchemaCollection() {
+        return new CommonsXsdSchemaCollection(
+                new ClassPathResource("movies.xsd"),
+                new ClassPathResource("actors.xsd")
+        );
     }
 }
