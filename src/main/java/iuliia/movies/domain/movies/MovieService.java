@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import movies.iuliia.service.Movie;
+import movies.iuliia.service.MovieInvoice;
 
 @Service
 @RequiredArgsConstructor
@@ -18,21 +20,31 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public List<MovieEntity> getAll() {
-        return movieRepository.findAll();
+    public Movie create(MovieInvoice movie) {
+        var entity = movieConverter.toMovieEntity(movie);
+        var savedEntity = movieRepository.save(entity);
+        return movieConverter.toMovie(savedEntity);
+    }
+
+    public List<Movie> getAll() {
+        return movieRepository.findAll()
+                .stream()
+                .map(movieConverter::toMovie)
+                .collect(Collectors.toList());
     }
 
     public Movie getById(Long id) {
         var movieEntity = movieRepository.findById(id).orElseThrow();
-        return movieConverter.convert(movieEntity);
+        return movieConverter.toMovie(movieEntity);
     }
 
     @Transactional
-    public MovieEntity update(Long id, MovieEntity movie) {
-        movie.setId(id);
-        var oldMovie = movieRepository.getOne(id);
-        movie.setCast(oldMovie.getCast());
-        return movieRepository.save(movie);
+    public Movie update(Movie movie) {
+        var oldMovie = movieRepository.getOne(movie.getId());
+        var movieEntity = movieConverter.toMovieEntity(movie);
+        movieEntity.setCast(oldMovie.getCast());
+        var savedEntity = movieRepository.save(movieEntity);
+        return movieConverter.toMovie(savedEntity);
     }
 
     public void deleteById(Long id) {

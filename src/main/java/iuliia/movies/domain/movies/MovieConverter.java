@@ -3,15 +3,18 @@ package iuliia.movies.domain.movies;
 import org.springframework.stereotype.Service;
 
 import movies.iuliia.service.Movie;
+import movies.iuliia.service.MovieInvoice;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Service
 public class MovieConverter {
 
-    Movie convert(MovieEntity entity) {
+    Movie toMovie(MovieEntity entity) {
         var movie = new Movie();
         movie.setId(entity.getId());
         movie.setTitle(entity.getTitle());
@@ -32,5 +35,44 @@ public class MovieConverter {
             }
         }
         return movie;
+    }
+
+    MovieEntity toMovieEntity(Movie movie) {
+        var entity = new MovieEntity();
+        entity.setId(movie.getId());
+        entity.setTitle(movie.getTitle());
+        if (movie.getYear() != null) {
+            entity.setYear(movie.getYear());
+        }
+        entity.setCountry(movie.getCountry());
+        if (movie.getLength() != null) {
+            entity.setLength(movie.getLength());
+        }
+        entity.setDirector(movie.getDirector());
+        if (movie.getPremier() != null) {
+            var date = LocalDateTime.parse(movie.getPremier().toString())
+                    .atOffset(OffsetDateTime.now().getOffset()).toLocalDate();
+            entity.setPremier(date);
+        }
+        return entity;
+    }
+
+    MovieEntity toMovieEntity(MovieInvoice movie) {
+        var entity = new MovieEntity();
+        entity.setTitle(movie.getTitle());
+        if (movie.getYear() != null) {
+            entity.setYear(movie.getYear());
+        }
+        entity.setCountry(movie.getCountry());
+        if (movie.getLength() != null) {
+            entity.setLength(movie.getLength());
+        }
+        entity.setDirector(movie.getDirector());
+        if (movie.getPremier() != null) {
+            var date = LocalDateTime.parse(movie.getPremier().toString())
+                    .atOffset(OffsetDateTime.now().getOffset()).toLocalDate();
+            entity.setPremier(date);
+        }
+        return entity;
     }
 }
