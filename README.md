@@ -19,3 +19,5 @@ See different implementations:
 Also see:
 
 [GraphQL instead of REST](../../tree/graphql)
+
+[SOAP](../../tree/soap)
