@@ -2,8 +2,8 @@ package iuliia.movies.domain.movies;
 
 import org.springframework.stereotype.Service;
 
-import movies.iuliia.service.Movie;
-import movies.iuliia.service.MovieInvoice;
+import movies.iuliia.service.movies.Movie;
+import movies.iuliia.service.movies.MovieInvoice;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 @Service
 public class MovieConverter {
 
-    Movie toMovie(MovieEntity entity) {
+    public Movie toMovie(MovieEntity entity) {
         var movie = new Movie();
         movie.setId(entity.getId());
         movie.setTitle(entity.getTitle());

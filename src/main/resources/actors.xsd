@@ -1,8 +1,8 @@
 <xs:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:m="http://iuliia.movies/service"
+           xmlns:c="http://iuliia.movies/service/common"
            xmlns:tns="http://iuliia.movies/service/actors" targetNamespace="http://iuliia.movies/service/actors"
            elementFormDefault="qualified">
-    <xs:import schemaLocation="movies.xsd" namespace="http://iuliia.movies/service"/>
+    <xs:import schemaLocation="common.xsd" namespace="http://iuliia.movies/service/common"/>
     <xs:element name="createActorRequest">
         <xs:complexType>
             <xs:sequence>
@@ -69,7 +69,7 @@
     </xs:element>
     <xs:complexType name="actorInvoice">
         <xs:sequence>
-            <xs:element name="firstName" type="m:non-empty-string"/>
+            <xs:element name="firstName" type="c:non-empty-string"/>
             <xs:element name="lastName" minOccurs="0" type="xs:string"/>
             <xs:element name="middleName" minOccurs="0" type="xs:string"/>
             <xs:element name="birthday" minOccurs="0" type="xs:date"/>
@@ -78,7 +78,7 @@
     <xs:complexType name="actor">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
-            <xs:element name="firstName" type="m:non-empty-string"/>
+            <xs:element name="firstName" type="c:non-empty-string"/>
             <xs:element name="lastName" minOccurs="0" type="xs:string"/>
             <xs:element name="middleName" minOccurs="0" type="xs:string"/>
             <xs:element name="birthday" minOccurs="0" type="xs:date"/>

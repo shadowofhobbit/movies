@@ -1,6 +1,8 @@
 <xs:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="http://iuliia.movies/service" targetNamespace="http://iuliia.movies/service"
+           xmlns:c="http://iuliia.movies/service/common"
+           xmlns:tns="http://iuliia.movies/service/movies" targetNamespace="http://iuliia.movies/service/movies"
            elementFormDefault="qualified">
+    <xs:import schemaLocation="common.xsd" namespace="http://iuliia.movies/service/common"/>
     <xs:element name="createMovieRequest">
         <xs:complexType>
             <xs:sequence>
@@ -68,7 +70,7 @@
     <xs:complexType name="movie">
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
-            <xs:element name="title" type="tns:non-empty-string"/>
+            <xs:element name="title" type="c:non-empty-string"/>
             <xs:element name="year" minOccurs="0" type="xs:int"/>
             <xs:element name="country" minOccurs="0" type="xs:string"/>
             <xs:element name="premier" minOccurs="0" type="xs:date"/>
@@ -78,7 +80,7 @@
     </xs:complexType>
     <xs:complexType name="movieInvoice">
         <xs:sequence>
-            <xs:element name="title" type="tns:non-empty-string"/>
+            <xs:element name="title" type="c:non-empty-string"/>
             <xs:element name="year" minOccurs="0" type="xs:int"/>
             <xs:element name="country" minOccurs="0" type="xs:string"/>
             <xs:element name="premier" minOccurs="0" type="xs:date"/>
@@ -86,9 +88,5 @@
             <xs:element name="director" minOccurs="0" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-    <simpleType name='non-empty-string'>
-        <restriction base='string'>
-            <minLength value='1'/>
-        </restriction>
-    </simpleType>
+
 </xs:schema>

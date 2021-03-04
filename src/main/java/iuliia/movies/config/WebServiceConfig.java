@@ -42,7 +42,6 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("MoviesPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://iuliia.movies/service");
         wsdl11Definition.setSchemaCollection(xsdSchemaCollection());
         return wsdl11Definition;
     }
@@ -50,8 +49,10 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean
     public XsdSchemaCollection xsdSchemaCollection() {
         return new CommonsXsdSchemaCollection(
+                new ClassPathResource("common.xsd"),
                 new ClassPathResource("movies.xsd"),
-                new ClassPathResource("actors.xsd")
+                new ClassPathResource("actors.xsd"),
+                new ClassPathResource("cast.xsd")
         );
     }
 }

@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import movies.iuliia.service.Movie;
-import movies.iuliia.service.MovieInvoice;
+import movies.iuliia.service.movies.Movie;
+import movies.iuliia.service.movies.MovieInvoice;
 
 @Service
 @RequiredArgsConstructor

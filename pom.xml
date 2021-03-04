@@ -80,6 +80,7 @@
                     <sources>
                         <source>${project.basedir}/src/main/resources/movies.xsd</source>
                         <source>${project.basedir}/src/main/resources/actors.xsd</source>
+                        <source>${project.basedir}/src/main/resources/cast.xsd</source>
                     </sources>
                 </configuration>
             </plugin>

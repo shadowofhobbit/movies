@@ -1,0 +1,9 @@
+<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://iuliia.movies/service/common"
+           elementFormDefault="qualified">
+    <xs:simpleType name='non-empty-string'>
+        <xs:restriction base='string'>
+            <xs:minLength value='1'/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

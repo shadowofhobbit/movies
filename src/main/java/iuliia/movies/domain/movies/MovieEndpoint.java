@@ -1,7 +1,7 @@
 package iuliia.movies.domain.movies;
 
 import lombok.RequiredArgsConstructor;
-import movies.iuliia.service.*;
+import movies.iuliia.service.movies.*;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -12,7 +12,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @RequiredArgsConstructor
 public class MovieEndpoint {
     private final MovieService movieService;
-    private final String NAMESPACE_URI = "http://iuliia.movies/service";
+    private final String NAMESPACE_URI = "http://iuliia.movies/service/movies";
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createMovieRequest")
     @ResponsePayload

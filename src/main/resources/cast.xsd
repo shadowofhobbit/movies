@@ -1,0 +1,48 @@
+<xs:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:m="http://iuliia.movies/service/movies"
+           xmlns:a="http://iuliia.movies/service/actors"
+           targetNamespace="http://iuliia.movies/service/cast"
+           elementFormDefault="qualified">
+    <xs:import schemaLocation="movies.xsd" namespace="http://iuliia.movies/service/movies"/>
+    <xs:import schemaLocation="actors.xsd" namespace="http://iuliia.movies/service/actors"/>
+    <xs:element name="addCastMemberRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movieId" type="xs:long"/>
+                <xs:element name="actorId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addCastMemberResponse">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCastRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movieId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getCastResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cast" minOccurs="0" maxOccurs="unbounded" type="a:actor"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getMoviesForActorRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="actorId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getMoviesForActorResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movie" minOccurs="0" maxOccurs="unbounded" type="m:movie"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
