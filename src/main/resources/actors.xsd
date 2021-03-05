@@ -76,12 +76,12 @@
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="actor">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
-            <xs:element name="firstName" type="c:non-empty-string"/>
-            <xs:element name="lastName" minOccurs="0" type="xs:string"/>
-            <xs:element name="middleName" minOccurs="0" type="xs:string"/>
-            <xs:element name="birthday" minOccurs="0" type="xs:date"/>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="tns:actorInvoice">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 </xs:schema>

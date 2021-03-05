@@ -68,15 +68,13 @@
         </xs:complexType>
     </xs:element>
     <xs:complexType name="movie">
-        <xs:sequence>
-            <xs:element name="id" type="xs:long"/>
-            <xs:element name="title" type="c:non-empty-string"/>
-            <xs:element name="year" minOccurs="0" type="xs:int"/>
-            <xs:element name="country" minOccurs="0" type="xs:string"/>
-            <xs:element name="premier" minOccurs="0" type="xs:date"/>
-            <xs:element name="length" minOccurs="0" type="xs:int"/>
-            <xs:element name="director" minOccurs="0" type="xs:string"/>
-        </xs:sequence>
+        <xs:complexContent>
+            <xs:extension base="tns:movieInvoice">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="movieInvoice">
         <xs:sequence>
